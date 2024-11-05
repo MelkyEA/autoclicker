@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<HBox alignment="CENTER_LEFT" spacing="20.0" xmlns:fx="http://javafx.com/fxml" maxHeight="350"
+      fx:controller="com.example.clicker.service.ClickerController">
+  <padding>
+    <Insets bottom="1.0" left="5.0" right="10.0" top="1.0"/>
+  </padding>
+  <VBox alignment="TOP_CENTER" spacing="5.0" xmlns:fx="http://javafx.com/fxml" maxHeight="350" minWidth="230">
+  <Label fx:id="startedOrStopped"/>
+
+  <Button onAction="#onStartButtonClick" minHeight="245" minWidth="230">
+      <graphic>
+          <VBox alignment="CENTER" spacing="5">
+              <Text text="START" />
+              <Text text="(ctrl+alt+x)" />
+          </VBox>
+      </graphic>
+  </Button>
+
+  </VBox>
+  <VBox alignment="BOTTOM_CENTER" spacing="5.0" minWidth="276" maxWidth="276" xmlns:fx="http://javafx.com/fxml">
+
+    <HBox xmlns:fx="http://javafx.com/fxml">
+        <Text text="Задержка" />
+        <Pane HBox.hgrow="ALWAYS" />
+        <TextField fx:id="delayTextField" minWidth="68" maxWidth="68" />
+    </HBox>
+    <Label fx:id="errorDelayText" textFill="red"/>
+
+    <HBox alignment="CENTER_LEFT" spacing="5.0" xmlns:fx="http://javafx.com/fxml">
+        <Text text="Интервал клика"/>
+        <Pane HBox.hgrow="ALWAYS" />
+        <TextField fx:id="intervalClickTextField" minWidth="68" maxWidth="68"/>
+    </HBox>
+    <Label fx:id="errorIntervalClickText" textFill="red"/>
+
+      <HBox alignment="CENTER_LEFT" spacing="5.0" xmlns:fx="http://javafx.com/fxml">
+          <Text text="Количество кликов"/>
+          <Pane HBox.hgrow="ALWAYS" />
+          <TextField fx:id="countClickField" minWidth="68" maxWidth="68"/>
+      </HBox>
+      <Label fx:id="errorCountClickText" textFill="red"/>
+
+    <HBox alignment="CENTER_LEFT" spacing="5.0" xmlns:fx="http://javafx.com/fxml">
+        <Text text="Ширина точки клика"/>
+        <Pane HBox.hgrow="ALWAYS" />
+        <TextField fx:id="setWidthTextField" minWidth="50" maxWidth="50"/>
+        <Text text="px"/>
+    </HBox>
+    <Label fx:id="errorSetWidthText" textFill="red"/>
+
+    <HBox alignment="CENTER_LEFT" spacing="5.0" xmlns:fx="http://javafx.com/fxml">
+        <Text text="Высота точки клика"/>
+        <Pane HBox.hgrow="ALWAYS" />
+        <TextField fx:id="setHeightTextField" minWidth="50" maxWidth="50"/>
+          <Text text="px" />
+    </HBox>
+    <Label fx:id="errorSetHeightText" textFill="red"/>
+
+  </VBox>
+
+</HBox>
+
