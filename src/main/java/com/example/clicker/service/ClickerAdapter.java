@@ -1,7 +1,6 @@
 package com.example.clicker.service;
 
 import lombok.Getter;
-import lombok.Setter;
 
 import static com.example.clicker.service.utils.Constants.CLICKER_OFF;
 import static com.example.clicker.service.utils.Constants.ERROR_VALID_FIELDS;
@@ -25,5 +24,9 @@ public class ClickerAdapter {
         } else {
             clickerStart.stop();
         }
+    }
+
+    public void setPointOnScreen(){
+        clickerStart.setChoosePointOnScreen();
     }
 }

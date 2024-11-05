@@ -21,12 +21,14 @@ public class ClickerStart {
 
     private Long delay;
     private Long intervalClick;
-    private Long width;
-    private Long height;
+    private Long x;
+    private Long y;
     private Long countClick;
 
     private boolean isStarted = false;
     private ScheduledFuture<?> scheduledFuture;
+    @Getter
+    private boolean isPointOnScreen = false;
 
     private ThreadPoolTaskScheduler taskScheduler;
 
@@ -65,22 +67,22 @@ public class ClickerStart {
                 setIntervalClick(Long.valueOf(intervalClickString));
             }
 
-            String widthString = clickerController.getSetWidthTextField().getText();
-            if (widthString == null || (widthString.isEmpty() || widthString.equals("0"))) {
-                errorSetWidthText = ERROR_FIELD_TEXT;
+            String widthString = clickerController.getSetXTextField().getText();
+            if (widthString == null || widthString.isEmpty()) {
+                errorSetWidthText = ERROR_PXLS_TEXT;
                 isError = true;
             } else {
                 errorSetWidthText = null;
-                clickerStart.setWidth(Long.valueOf(widthString));
+                clickerStart.setX(Long.valueOf(widthString));
             }
 
-            String heightString = clickerController.getSetHeightTextField().getText();
-            if (heightString == null || (heightString.isEmpty() || heightString.equals("0"))) {
-                errorSetHeightText = ERROR_FIELD_TEXT;
+            String heightString = clickerController.getSetYTextField().getText();
+            if (heightString == null || heightString.isEmpty()) {
+                errorSetHeightText = ERROR_PXLS_TEXT;
                 isError = true;
             } else {
                 errorSetHeightText = null;
-                clickerStart.setHeight(Long.valueOf(heightString));
+                clickerStart.setY(Long.valueOf(heightString));
             }
 
             String countClickString = clickerController.getCountClickField().getText();
@@ -145,11 +147,32 @@ public class ClickerStart {
         isStarted = !isStarted;
     }
 
+    public void setChoosePointOnScreen() {
+        isPointOnScreen = true;
+    }
+
+    public void setXAndYOnScreen(long x, long y) {
+        this.x = x;
+        this.y = y;
+        Platform.runLater(() -> {
+                    ClickerController.getInstance().getSetXTextField().setText(String.valueOf(x));
+                    ClickerController.getInstance().getSetYTextField().setText(String.valueOf(y));
+                }
+        );
+
+        Platform.runLater(() -> {
+                    ClickerApplication.getPrimaryStage().setIconified(false);
+                }
+        );
+
+        isPointOnScreen = false;
+    }
+
     public void click() {
         Platform.runLater(() -> {
             Robot rb = new Robot();
             for (int i = 0; i < countClick; i++) {
-                rb.mouseMove(width, height);
+                rb.mouseMove(x, y);
                 rb.mousePress(MouseButton.PRIMARY);
                 rb.mouseRelease(MouseButton.PRIMARY);
                 try {

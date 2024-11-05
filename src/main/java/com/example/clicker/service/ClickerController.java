@@ -47,11 +47,11 @@ public class ClickerController {
 
     @FXML
     @Getter
-    private TextField setWidthTextField;
+    private TextField setXTextField;
 
     @FXML
     @Getter
-    private TextField setHeightTextField;
+    private TextField setYTextField;
 
     @FXML
     @Getter
@@ -64,6 +64,12 @@ public class ClickerController {
     @FXML
     protected void onStartButtonClick() {
         clickerAdapter.doStartOrStop();
+    }
+
+    @FXML
+    protected void pointOnScreen() {
+        ClickerApplication.getPrimaryStage().setIconified(true);
+        clickerAdapter.setPointOnScreen();
     }
 
 

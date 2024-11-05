@@ -2,12 +2,9 @@ package com.example.clicker.service;
 
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
-import javafx.application.Platform;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import static com.example.clicker.service.utils.Constants.CLICKER_OFF;
 
 
 public class KeyListener implements NativeKeyListener {
@@ -22,6 +19,16 @@ public class KeyListener implements NativeKeyListener {
             ClickerAdapter.getClickerAdapter().doStartOrStop();
             pressedKeys.clear();
         }
+
+        ClickerStart clickerStart = ClickerStart.getClickerStart();
+
+        if(clickerStart.isPointOnScreen()){
+            if(checkPressedCtrlAltS()){
+                clickerStart.setXAndYOnScreen(MouseListener.getMouseX(), MouseListener.getMouseY());
+                pressedKeys.clear();
+            }
+        }
+
     }
 
     @Override
@@ -35,6 +42,10 @@ public class KeyListener implements NativeKeyListener {
 
     private boolean checkPressedCtrlAltX() {
         return pressedKeys.contains(NativeKeyEvent.VC_CONTROL) && pressedKeys.contains(NativeKeyEvent.VC_ALT) && pressedKeys.contains(NativeKeyEvent.VC_X);
+    }
+
+    private boolean checkPressedCtrlAltS() {
+        return pressedKeys.contains(NativeKeyEvent.VC_CONTROL) && pressedKeys.contains(NativeKeyEvent.VC_ALT) && pressedKeys.contains(NativeKeyEvent.VC_S);
     }
 
 }
